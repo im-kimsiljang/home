@@ -17,6 +17,18 @@
       "destination": "https://cost-calculator-eight-nu.vercel.app/api/:path*"
     },
     {
+      "source": "/admin",
+      "destination": "https://cost-calculator-eight-nu.vercel.app/admin"
+    },
+    {
+      "source": "/admin/",
+      "destination": "https://cost-calculator-eight-nu.vercel.app/admin/"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "https://cost-calculator-eight-nu.vercel.app/admin/:path*"
+    },
+    {
       "source": "/robots.txt",
       "destination": "/SEO/robots.txt"
     },
