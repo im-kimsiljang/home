@@ -6,6 +6,10 @@
       "destination": "https://cost-calculator-eight-nu.vercel.app/cost-calculator"
     },
     {
+      "source": "/cost-calculator/",
+      "destination": "https://cost-calculator-eight-nu.vercel.app/cost-calculator/"
+    },
+    {
       "source": "/cost-calculator/:path*",
       "destination": "https://cost-calculator-eight-nu.vercel.app/cost-calculator/:path*"
     },
