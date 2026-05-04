@@ -18,7 +18,8 @@
 
 ## 새 앱 추가하려면?
 
-[GUIDELINES.md](./GUIDELINES.md) 참고.
+- 🛡️ [GUARDRAILS.md](./GUARDRAILS.md) — 무조건 지켜야 할 룰 (네이밍, .gitignore, PWA 필수 등)
+- 📘 [GUIDELINES.md](./GUIDELINES.md) — 권장 사항 + 코드 템플릿
 
 ## 파일
 

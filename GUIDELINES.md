@@ -1,89 +1,29 @@
-# 김실장 월간 앱 가드레일
+# 김실장 가이드라인 📘
 
-새 앱을 만들 때 따라야 할 규칙입니다.
+**권장 사항 + 템플릿.** 따르면 좋은 best practices와 코드 예시. 강제 룰은 [GUARDRAILS.md](./GUARDRAILS.md) 참고.
 
-## 네이밍 규칙
+---
 
-- **로컬 폴더**: `YYMM-앱이름` (예: `2604-cost-calculator`)
-  - 시간순 정렬용 프리픽스
-- **GitHub 레포**: `앱이름` (예: `cost-calculator`)
-  - im-kimsiljang 조직 아래
-- **URL**: `kimsiljang.com/앱이름/` (예: `kimsiljang.com/cost-calculator/`)
+## 새 앱 만드는 추천 순서
 
-## 새 앱 만드는 절차
+1. **로컬 폴더 생성**: `YYMM-앱이름/`
+2. **기획**: 자료조사/템플릿 만들기 (로컬에만, 푸시 ❌)
+3. **디자인**: 김실장 브랜드 가드레일 따름 (`shared/design-system.css` 예정)
+4. **개발**: PWA 3종 세트 + 앱 본체
+5. **GitHub 레포 생성**: `gh repo create im-kimsiljang/앱이름 --public --source=. --push`
+6. **Vercel 프로젝트 생성**: `im-kimsiljang/앱이름` 연결
+7. **`Home/vercel.json` rewrites 추가** (필요시):
+   ```json
+   { "source": "/앱이름/:path*", "destination": "https://앱-xxx.vercel.app/앱이름/:path*" }
+   ```
+8. **`Home/apps.json` + `Home/index.html`** 카드 추가 ⚠️ (가드레일)
+9. **라이브 검증** (kimsiljang.com/앱이름/)
 
-1. 로컬에 `YYMM-앱이름/` 폴더 생성
-2. 코드 작성 (디자인시스템은 Home의 가드레일 따름)
-3. GitHub에 `im-kimsiljang/앱이름` 레포 생성 후 푸시
-4. Vercel 프로젝트 생성 → `kimsiljang.com/앱이름/`로 라우팅
-5. **`Home/apps.json`에 한 줄 추가** (잊지 말 것)
-6. **`Home/index.html`에 카드 1개 추가**
+---
 
-## 폴더 구조 (각 앱 레포)
+## PWA 구현 템플릿
 
-```
-앱이름/
-├── index.html               # 앱 랜딩
-├── (앱 코드)
-├── icons/                   # PWA 아이콘
-├── manifest.json            # PWA 설정
-├── sw.js                    # Service Worker
-├── sitemap.xml
-├── favicon.ico
-├── vercel.json              # Vercel 라우팅 설정
-└── .gitignore
-```
-
-## 항상 .gitignore 처리
-
-```
-.vercel
-.DS_Store
-.claude/
-*.jpeg
-*.jpg
-icons/preview/
-00-자료조사/
-01-템플릿/
-02-GTM/
-03-Branding/
-04-Character/
-DESIGN-SYSTEM-김실장.md
-02-PRD-*.md
-Icon
-*.xlsx
-```
-
-⚠️ `Icon?` 패턴은 `icons/` 폴더까지 매칭해서 제외시키니 쓰지 말 것 (macOS의 `Icon\r` 파일은 그냥 수동 삭제).
-
-문서/리서치/브랜딩 자산은 로컬에만 두고 레포에는 코드만 올립니다.
-
-## PWA 필수 (모든 월간 앱)
-
-모든 앱은 **PWA(Progressive Web App)** 로 만듭니다. 사용자가 홈화면에 추가하면 진짜 앱처럼 작동.
-
-### PWA 구성 요소 (3종 세트)
-
-1. **`manifest.json`** — 앱 정보 (이름, 아이콘, 시작 URL, 색상)
-2. **`sw.js`** — Service Worker (오프라인 캐싱, 백그라운드 동기화)
-3. **`icons/`** — PWA 아이콘
-   - `icon-192.png` (필수, 안드로이드)
-   - `icon-512.png` (필수, 안드로이드/스플래시)
-   - `apple-touch-icon.png` (필수, iOS)
-   - `favicon-16.png`, `favicon-32.png` (선택, 브라우저 탭)
-
-### `<head>` 필수 메타 태그
-
-```html
-<link rel="manifest" href="/manifest.json?v=1">
-<meta name="theme-color" content="#3b5fff">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="앱이름">
-<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=1">
-```
-
-### `manifest.json` 템플릿
+### `manifest.json`
 
 ```json
 {
@@ -108,20 +48,83 @@ Icon
 const CACHE = '앱이름-v1';
 const ASSETS = ['/앱이름/', '/앱이름/index.html', '/manifest.json'];
 
-self.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS))));
-self.addEventListener('activate', e => e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))));
-self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));
+self.addEventListener('install', e =>
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)))
+);
+
+self.addEventListener('activate', e =>
+  e.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
+    )
+  )
+);
+
+self.addEventListener('fetch', e =>
+  e.respondWith(
+    caches.match(e.request).then(r => r || fetch(e.request))
+  )
+);
 ```
 
-### 사용자 안내 카피 (마케팅용)
+### Service Worker 등록 (HTML에 추가)
 
-기술 용어 "PWA" 대신:
-- ✅ "**홈화면에 앱처럼 추가**할 수 있어요"
-- ✅ "별도 설치 없이 **앱처럼 사용**"
-- ❌ "PWA로 제작" (사장님 대상엔 어려움)
+```html
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/앱이름/sw.js');
+  }
+</script>
+```
 
-## 디자인시스템
+---
 
-- 모든 앱은 `김실장` 브랜드 가드레일을 따름
-- 공통 자산은 추후 `Home/shared/`로 통합 예정
-- (TODO) `DESIGN-SYSTEM-김실장.md`를 Home으로 이전
+## 디자인 시스템 (권장)
+
+- **컬러**: `--primary: #3b5fff` (김실장 브랜드 블루)
+- **폰트**: Pretendard (cdn.jsdelivr.net)
+- **이모지 아이콘**: `/icons/emoji/*.svg` 활용
+- **캐릭터**: `/icons/character-*.png` 활용
+- **상세**: 추후 `Home/shared/design-system.css` 참고 (TODO)
+
+---
+
+## 사용자 안내 카피 (마케팅)
+
+기술 용어 대신 사장님이 이해하는 표현:
+
+| 기술 표현 ❌ | 사장님 친화 ✅ |
+|------------|----------------|
+| PWA로 제작 | **홈화면에 앱처럼 추가** |
+| Service Worker로 캐싱 | **인터넷 끊겨도 일부 동작** |
+| HTTPS / SSL | (언급 안 함, 당연한 거) |
+| OAuth / Firebase Auth | **구글 계정으로 로그인** |
+| Serverless Function | **빠른 처리** |
+
+---
+
+## 코드 스타일 (권장)
+
+- **인라인 CSS**: 작은 앱은 `<style>` 인라인이 빠름 (HTTP 요청 절약)
+- **외부 라이브러리**: CDN 우선 (npm 말고) — 빌드 단순화
+- **JS 모듈**: `<script type="module">` 활용
+- **타입스크립트**: 필요시만 (가벼운 앱은 plain JS)
+
+---
+
+## API 사용 (`kimsiljang.com/api/*`)
+
+- 모든 앱이 공통 API 사용 가능
+- 엔드포인트 목록: [im-kimsiljang/api](https://github.com/im-kimsiljang/api) README 참고
+- 새 엔드포인트 필요시 → api 레포에 PR
+
+---
+
+## TODO 항목
+
+다음 작업들은 향후 진행:
+
+- [ ] `Home/shared/design-system.css` 생성 (현재 cost-calculator에 있는 디자인시스템 이전)
+- [ ] `Home/shared/brand.js` (로고/컬러/폰트 공통화)
+- [ ] 앱 템플릿 (`templates/monthly-app/`) 만들어서 새 앱 시작 1분 컷
+- [ ] CI: 새 앱 푸시 시 PWA 체크 자동화 (manifest, sw.js 존재 검증)
