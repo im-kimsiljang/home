@@ -14,19 +14,19 @@
     },
     {
       "source": "/api/:path*",
-      "destination": "https://cost-calculator-eight-nu.vercel.app/api/:path*"
+      "destination": "https://api-seven-theta-49.vercel.app/api/:path*"
     },
     {
       "source": "/admin",
-      "destination": "https://cost-calculator-eight-nu.vercel.app/admin"
+      "destination": "https://admin-psi-hazel-63.vercel.app/"
     },
     {
       "source": "/admin/",
-      "destination": "https://cost-calculator-eight-nu.vercel.app/admin/"
+      "destination": "https://admin-psi-hazel-63.vercel.app/"
     },
     {
       "source": "/admin/:path*",
-      "destination": "https://cost-calculator-eight-nu.vercel.app/admin/:path*"
+      "destination": "https://admin-psi-hazel-63.vercel.app/:path*"
     },
     {
       "source": "/robots.txt",
