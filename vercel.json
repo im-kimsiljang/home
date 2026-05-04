@@ -14,7 +14,7 @@
     },
     {
       "source": "/api/:path*",
-      "destination": "https://api-seven-theta-49.vercel.app/api/:path*"
+      "destination": "https://siljang.vercel.app/api/:path*"
     },
     {
       "source": "/admin",
