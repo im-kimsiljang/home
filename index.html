@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>김실장 — 매달 도구 하나</title>
+  <meta name="description" content="자영업자에게 필요한 도구를 매달 하나씩 만듭니다.">
+  <link rel="icon" href="/favicon.ico">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", sans-serif;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      color: #1a1a1a;
+      line-height: 1.6;
+      background: #fafafa;
+    }
+    header h1 { font-size: 32px; margin: 0; letter-spacing: -0.02em; }
+    header p { color: #666; margin-top: 8px; font-size: 16px; }
+    .apps { margin-top: 48px; display: flex; flex-direction: column; gap: 12px; }
+    .app {
+      display: block;
+      padding: 24px;
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: all .2s ease;
+    }
+    .app:hover { border-color: #333; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.04); }
+    .app .month { font-size: 13px; color: #999; font-weight: 500; }
+    .app .name { font-size: 18px; font-weight: 600; margin-top: 4px; }
+    .app .desc { font-size: 14px; color: #555; margin-top: 6px; }
+    footer { margin-top: 80px; font-size: 13px; color: #999; text-align: center; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>김실장</h1>
+    <p>자영업자에게 필요한 도구, 매달 하나씩.</p>
+  </header>
+  <main class="apps">
+    <a href="/cost-calculator/" class="app">
+      <div class="month">2026.04</div>
+      <div class="name">식당 원가 계산기</div>
+      <div class="desc">메뉴별 원가율을 한눈에 계산합니다</div>
+    </a>
+    <!-- 새 앱은 여기에 추가 -->
+  </main>
+  <footer>
+    © 2026 김실장
+  </footer>
+</body>
+</html>

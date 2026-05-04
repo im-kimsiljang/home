@@ -1,0 +1,15 @@
+{
+  "$schema": "./apps.schema.json",
+  "description": "월간 앱 레지스트리 — 새 앱을 추가할 때 여기에 등록하세요",
+  "apps": [
+    {
+      "month": "2026-04",
+      "slug": "cost-calculator",
+      "name": "식당 원가 계산기",
+      "description": "메뉴별 원가율을 한눈에 계산합니다",
+      "url": "/cost-calculator/",
+      "repo": "https://github.com/im-kimsiljang/cost-calculator",
+      "status": "live"
+    }
+  ]
+}
