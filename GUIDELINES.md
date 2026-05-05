@@ -4,6 +4,28 @@
 
 ---
 
+## URL은 짧게 ⭐
+
+**모든 URL은 가능한 짧게.** 사용자가 입력/공유하기 편하고, 카드 표시도 깔끔.
+
+| ❌ 길다 | ✅ 짧다 |
+|---------|---------|
+| `kimsiljang.com/cost-calculator/` | `kimsiljang.com/cal/` |
+| `kimsiljang.com/restaurant-cost-calculator/` | `kimsiljang.com/cal/` |
+| `cost-calculator.kimsiljang.com` | `cal.kimsiljang.com` |
+| `automation-wifi-setup.kimsiljang.com` | `wifi.kimsiljang.com` |
+
+**원칙:**
+- 풀네임은 **레포/프로젝트명**에서 (예: `cost-calculator` 레포)
+- URL은 **3-5글자** 약자 (예: `cal`, `wifi`, `pos`, `crm`)
+- 약자가 헷갈리면 풀네임 사용 OK
+
+**기존 긴 URL 정리:**
+- 새 짧은 URL 만들고 → 옛 URL은 301 영구 리다이렉트 (SEO 보존)
+- 예시: `home/vercel.json`의 `/cost-calculator/* → /cal/*` 리다이렉트
+
+---
+
 ## 새 앱 만드는 추천 순서
 
 1. **로컬 폴더 생성**: `YYMM-앱이름/`

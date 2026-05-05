@@ -1,15 +1,15 @@
 {
   "rewrites": [
     {
-      "source": "/cost-calculator",
+      "source": "/cal",
       "destination": "https://cost-calculator-eight-nu.vercel.app/cost-calculator"
     },
     {
-      "source": "/cost-calculator/",
+      "source": "/cal/",
       "destination": "https://cost-calculator-eight-nu.vercel.app/cost-calculator/"
     },
     {
-      "source": "/cost-calculator/:path*",
+      "source": "/cal/:path*",
       "destination": "https://cost-calculator-eight-nu.vercel.app/cost-calculator/:path*"
     },
     {
@@ -43,8 +43,23 @@
   ],
   "redirects": [
     {
+      "source": "/cost-calculator",
+      "destination": "/cal",
+      "permanent": true
+    },
+    {
+      "source": "/cost-calculator/",
+      "destination": "/cal/",
+      "permanent": true
+    },
+    {
+      "source": "/cost-calculator/:path*",
+      "destination": "/cal/:path*",
+      "permanent": true
+    },
+    {
       "source": "/restaurant-cost-calculator.html",
-      "destination": "/cost-calculator/",
+      "destination": "/cal/",
       "permanent": true
     },
     {
